@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  mysql-tp:
+    image: mysql
+    restart: always
+    networks:
+      - mon-network
+    environment:
+      MYSQL_ROOT_PASSWORD: mdp
+
+  phpmyadmin-tp:
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    networks:
+      - mon-network
+    environment:
+      PMA_HOST: mysql-tp
+      MYSQL_ROOT_PASSWORD: mdp
+    ports:
+      - "8080:80"
+
+networks:
+  mon-network:
+    driver: bridge
